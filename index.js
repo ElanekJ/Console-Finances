@@ -1,4 +1,4 @@
-var finances = [
+let finances = [
     ['Jan-2010', 867884],
     ['Feb-2010', 984655],
     ['Mar-2010', 322013],
@@ -86,4 +86,24 @@ var finances = [
     ['Jan-2017', 138230],
     ['Feb-2017', 671099]
     ];
+
+let inclMonths = 0;
+let losses = 0;
+let profit = 0;
+let totalFinances=0;
+
+// months included in datasheet
+inclMonths = finances.length;
+
+//Total amount of profits/losses
+for (let i = 0; i < finances.length; i++) {
+    totalFinances = totalFinances + finances[i];
     
+}
+
+//losses = 
+
+
+alert(inclMonths);
+console.log(totalFinances);
+
