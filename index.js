@@ -97,13 +97,20 @@ inclMonths = finances.length;
 
 //Total amount of profits/losses
 for (let i = 0; i < finances.length; i++) {
-    totalFinances = totalFinances + finances[i];
-    
+    totalFinances +=finances[i][1];
 }
 
 //losses = 
 
 
-alert(inclMonths);
-console.log(totalFinances);
+//print on screen months
+document.getElementById("demo").innerHTML = ("Total months = \n" + inclMonths );
+
+
+// print on screen total finances
+document.write("\n total finances = " + totalFinances);
+
+
+//alert(inclMonths);
+//console.log(totalFinances);
 
