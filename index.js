@@ -91,25 +91,45 @@ let inclMonths = 0;
 let losses = 0;
 let profit = 0;
 let totalFinances=0;
+let lastFinances;
 
 // months included in datasheet
 inclMonths = finances.length;
 
 //Total amount of profits/losses
 for (let i = 0; i < finances.length; i++) {
-    totalFinances +=finances[i][1];
+    totalFinances += finances[i][1];
+    
+    if (i > 0) {
+        if (finances[i][1] > lastFinances) {
+            profit += finances[i][1];
+        }
+        else {
+            losses -= finances[i][1];
+        }
+        
+    }
+    lastFinances = finances[i][1];
 }
 
 //losses = 
-
+//for (let j = 0; j < finances.length; j++) {}
 
 //print on screen months
-document.getElementById("demo").innerHTML = ("Total months = \n" + inclMonths );
+document.getElementById("totalMonths").innerHTML = ("Total Months = " + inclMonths );
 
 
 // print on screen total finances
-document.write("\n total finances = " + totalFinances);
+document.getElementById("totalFinances").innerHTML = ("Total Finances = " + totalFinances );
+document.write("total finances = " + totalFinances);
 
+// print on screen total profit
+document.getElementById("profit").innerHTML = ("Total Profit = " + profit );
+document.write("Total Profit = " + profit);
+
+// print on screen total losses
+document.getElementById("losses").innerHTML = ("Total Losses = " + losses );
+document.write("Total Losses = " + losses);
 
 //alert(inclMonths);
 //console.log(totalFinances);
