@@ -89,9 +89,14 @@ let finances = [
 
 let inclMonths = 0;
 let losses = 0;
+let averageLosses = 0;
+let countLosses = 0;
 let profit = 0;
+let countProfit = 0;
+let averageProfit = 0;
 let totalFinances=0;
 let lastFinances;
+
 
 // months included in datasheet
 inclMonths = finances.length;
@@ -103,14 +108,23 @@ for (let i = 0; i < finances.length; i++) {
     if (i > 0) {
         if (finances[i][1] > lastFinances) {
             profit += finances[i][1];
+            countProfit++;
         }
         else {
             losses -= finances[i][1];
+            countLosses++;
         }
         
     }
+
     lastFinances = finances[i][1];
 }
+
+averageProfit = profit / countProfit;
+averageLosses = losses / countLosses;
+
+let average = (averageProfit + averageLosses)/(countProfit+countLosses);
+
 
 //losses = 
 //for (let j = 0; j < finances.length; j++) {}
@@ -121,15 +135,20 @@ document.getElementById("totalMonths").innerHTML = ("Total Months = " + inclMont
 
 // print on screen total finances
 document.getElementById("totalFinances").innerHTML = ("Total Finances = " + totalFinances );
-document.write("total finances = " + totalFinances);
+//document.getElementById("totalFinances").innerHTML = ("Total Finances = " + totalFinances/inclMonths );
 
-// print on screen total profit
+
+// print on screen profit
 document.getElementById("profit").innerHTML = ("Total Profit = " + profit );
-document.write("Total Profit = " + profit);
+document.getElementById("aveProf").innerHTML = ("Average Profit = " + averageProfit);
+document.write("Total Profit = " + countProfit);
 
-// print on screen total losses
+// print on screen losses
 document.getElementById("losses").innerHTML = ("Total Losses = " + losses );
-document.write("Total Losses = " + losses);
+document.getElementById("aveLos").innerHTML = ("Average Losses = " + averageLosses);
+document.write("Total Losses = " + countLosses);
+
+document.getElementById("average").innerHTML = ("Average = " + average);
 
 //alert(inclMonths);
 //console.log(totalFinances);
