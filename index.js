@@ -88,14 +88,13 @@ let finances = [
     ];
 
 let inclMonths = 0;
+let profits = 0;
 let losses = 0;
-let averageLosses = 0;
 let countLosses = 0;
-let profit = 0;
 let countProfit = 0;
-let averageProfit = 0;
-let totalFinances=0;
-let lastFinances;
+let totalFinances = 0;
+let giProfit = ['',0];
+let giLosses = ['',0];
 
 
 // months included in datasheet
@@ -105,51 +104,56 @@ inclMonths = finances.length;
 for (let i = 0; i < finances.length; i++) {
     totalFinances += finances[i][1];
     
+    
+    //Counting average of profits and losses + finding greatest increase and greatest decrease
     if (i > 0) {
-        if (finances[i][1] > lastFinances) {
-            profit += finances[i][1];
+        if (finances[i][1] > finances[i-1][1]) {
+            let profit = finances[i][1] - finances[i-1][1];
+            profits += profit;
             countProfit++;
+            
+            //greatest increase
+            if (profit > giProfit[1]){
+                  giProfit[0] = finances[i][0];  
+                  giProfit[1] = profit;
+            }
         }
         else {
-            losses -= finances[i][1];
+            let lose = finances[i][1] - finances[i-1][1];
+            losses += lose;
             countLosses++;
+
+            //greatest decrease
+            if (lose < giLosses[1]){
+                giLosses[0] = finances[i][0];  
+                giLosses[1] = lose;
+          }
         }
         
+        
     }
-
-    lastFinances = finances[i][1];
+        
 }
 
-averageProfit = profit / countProfit;
-averageLosses = losses / countLosses;
+//Average of profits and losses
+let average = (profits + losses)/(countProfit+countLosses);
 
-let average = (averageProfit + averageLosses)/(countProfit+countLosses);
+//concatenation to two decimal numbers
+let twoDec = average.toFixed(2);
 
-
-//losses = 
-//for (let j = 0; j < finances.length; j++) {}
 
 //print on screen months
-document.getElementById("totalMonths").innerHTML = ("Total Months = " + inclMonths );
+document.getElementById("totalMonths").innerHTML = ("Total Months: " + inclMonths );
 
 
 // print on screen total finances
-document.getElementById("totalFinances").innerHTML = ("Total Finances = " + totalFinances );
-//document.getElementById("totalFinances").innerHTML = ("Total Finances = " + totalFinances/inclMonths );
+document.getElementById("totalFinances").innerHTML = ("Total: $" + totalFinances );
 
+// print on screen average of profits and losses
+document.getElementById("aveChange").innerHTML = ("Average Changes: " + twoDec + "  this DOES NOT INCLUDE the first month!" );
 
-// print on screen profit
-document.getElementById("profit").innerHTML = ("Total Profit = " + profit );
-document.getElementById("aveProf").innerHTML = ("Average Profit = " + averageProfit);
-document.write("Total Profit = " + countProfit);
+// print on screen greatest increase and greatest decrease
+document.getElementById("giProfit").innerHTML = ("Greatest Increase: " + giProfit[0] +": $" + giProfit[1] );
+document.getElementById("giLosses").innerHTML = ("Greatest Decrease: " + giLosses[0] +": $" + giLosses[1]);
 
-// print on screen losses
-document.getElementById("losses").innerHTML = ("Total Losses = " + losses );
-document.getElementById("aveLos").innerHTML = ("Average Losses = " + averageLosses);
-document.write("Total Losses = " + countLosses);
-
-document.getElementById("average").innerHTML = ("Average = " + average);
-
-//alert(inclMonths);
-//console.log(totalFinances);
 
